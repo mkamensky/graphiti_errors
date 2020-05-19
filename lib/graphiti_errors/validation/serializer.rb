@@ -39,7 +39,7 @@ module GraphitiErrors
       def each_error
         object.errors.messages.each_pair do |attribute, messages|
           details = if Rails::VERSION::MAJOR >= 5
-            object.errors.details.find { |k, v| k == attribute }[1]
+            object.errors.details.find { |k, v| k == attribute }.try(:[],1)
           end
 
           messages.each_with_index do |message, index|
